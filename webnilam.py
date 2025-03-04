@@ -330,7 +330,7 @@ def generate():
             
             if st.button("Generate QR Code"):
                 # Generate QR code data
-                link = "http://192.168.1.100:8505/?page=home"
+                link = "https://webminyaknilam.streamlit.app"
                 data = f"{link}Id_Penyulingan={Id_Penyulingan}"
                 qr_image = segno.make(data)
 
