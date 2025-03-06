@@ -71,7 +71,7 @@ def petani():
     st.title("Profil Petani")
     Id_Petani = st.text_input("Masukkan Id Petani")
     Jenis_Penyulingan = st.text_input("Masukkan Jenis Penyulingan")
-    Nama = st.text_input("Masukkan Nama")
+    Nama_Petani= st.text_input("Masukkan Nama")
     Desa = st.text_input("Masukkan Desa")
     Kecamatan = st.text_input("Masukkan Kecamatan")
     Kabupaten = st.text_input("Masukkan Kabupaten")
@@ -79,16 +79,16 @@ def petani():
     Tanggal_penjualan = st.date_input("Tanggal Penjualan")
     Jumlah_Penjualan_Minyak = st.text_input("Masukkan jumlah penjualan minyak")
     if st.button("Tambah Profil Petani"):
-        add_petani(Id_Petani, Nama, Desa, Kecamatan, Kabupaten, Tanggal_penyulingan, Tanggal_penjualan, Jenis_Penyulingan, Jumlah_Penjualan_Minyak)
+        add_petani(Id_Petani, Nama_Petani, Desa, Kecamatan, Kabupaten, Tanggal_penyulingan, Tanggal_penjualan, Jenis_Penyulingan, Jumlah_Penjualan_Minyak)
         st.success("Pelacakan berhasil ditambahkan.")
 
 # Fungsi untuk menambahkan Petani ke database
-def add_petani(Id_Petani, Nama, Desa, Kecamatan, Kabupaten, Tanggal_penyulingan, Tanggal_penjualan, Jenis_Penyulingan, Jumlah_Penjualan_Minyak):
+def add_petani(Id_Petani, Nama_Petani, Desa, Kecamatan, Kabupaten, Tanggal_penyulingan, Tanggal_penjualan, Jenis_Penyulingan, Jumlah_Penjualan_Minyak):
     try:
         with sqlite3.connect('data_nilam.db') as conn:
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO Table_Petani (Id_Petani, Nama, Desa, Kecamatan, Kabupaten, Tanggal_penyulingan, Tanggal_penjualan, Jenis_Penyulingan, Jumlah_Penjualan_Minyak) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-                            (Id_Petani, Nama, Desa, Kecamatan, Kabupaten,  Tanggal_penyulingan, Tanggal_penjualan, Jenis_Penyulingan, Jumlah_Penjualan_Minyak))
+            cursor.execute('INSERT INTO Table_Petani (Id_Petani, Nama_Petani, Desa, Kecamatan, Kabupaten, Tanggal_penyulingan, Tanggal_penjualan, Jenis_Penyulingan, Jumlah_Penjualan_Minyak) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+                            (Id_Petani, Nama_Petani, Desa, Kecamatan, Kabupaten,  Tanggal_penyulingan, Tanggal_penjualan, Jenis_Penyulingan, Jumlah_Penjualan_Minyak))
             conn.commit()                
     except sqlite3.Error as e:
         st.error(f"Kesalahan database: {e}")
@@ -117,6 +117,7 @@ def get_ids_from_db(query):
 def penyuling():
     st.title("Produksi/Penyulingan Nilam")
     Id_Penyulingan = st.text_input("Id Produksi/Penyulingan")
+    Id_Minyak_Nilam = st.text_input("Masukkan Id Minyak Nilam")
     Jenis_Penyulingan = st.text_input("Masukkan Jenis Penyulingan")
     Jumlah_minyak = st.text_input("Masukkan jumlah Minyak")
     Kadar_PA = st.text_input("Masukkan Kadar_PA")
@@ -124,16 +125,16 @@ def penyuling():
     Tanggal_Penyulingan = st.date_input("Tanggal Penyulingan")
     Tanggal_Penjualan = st.date_input("Tanggal Penjualan")
     if st.button("Tambah Penyulingan"):
-        add_penyulingan(Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Kadar_PA, Lokasi, Tanggal_Penyulingan, Tanggal_Penjualan)
+        add_penyulingan(Id_Penyulingan, Id_Minyak_Nilam, Jenis_Penyulingan, Jumlah_minyak, Kadar_PA, Lokasi, Tanggal_Penyulingan, Tanggal_Penjualan)
         st.success("Pelacakan berhasil ditambahkan.")
 
 # Fungsi untuk menambahkan Produksi ke database
-def add_penyulingan(Id_Penyulingan, Jenis_Penyulingan, Jumlah_Minyak, Kadar_PA, Lokasi, Tanggal_Penyulingan, Tanggal_Penjualan):
+def add_penyulingan(Id_Penyulingan, Id_Minyak_Nilam, Jenis_Penyulingan, Jumlah_Minyak, Kadar_PA, Lokasi, Tanggal_Penyulingan, Tanggal_Penjualan):
     try:
         with sqlite3.connect('data_nilam.db') as conn:
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO Table_Penyulingan (Id_Penyulingan, Jenis_Penyulingan, Jumlah_Minyak, Kadar_PA, Lokasi, Tanggal_Penyulingan, Tanggal_Penjualan) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-                           (Id_Penyulingan, Jenis_Penyulingan, Jumlah_Minyak, Kadar_PA, Lokasi, Tanggal_Penyulingan, Tanggal_Penjualan))
+            cursor.execute('INSERT INTO Table_Penyulingan (Id_Penyulingan, Id_Minyak_Nilam, Jenis_Penyulingan, Jumlah_Minyak, Kadar_PA, Lokasi, Tanggal_Penyulingan, Tanggal_Penjualan) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+                           (Id_Penyulingan, Id_Minyak_Nilam, Jenis_Penyulingan, Jumlah_Minyak, Kadar_PA, Lokasi, Tanggal_Penyulingan, Tanggal_Penjualan))
             conn.commit()
     except sqlite3.Error as e:
         st.error(f"Kesalahan database: {e}")
@@ -203,6 +204,22 @@ def pengepul_2():
         add_pengepul_2(Id_Petani, Id_Pengepul_1, Id_Pengepul_2, Id_Penyulingan, Jenis_Penyulingan, Tanggal_Pembelian, Kadar_PA_Pembelian, Jumlah_Pembelian, Jumlah_Penjualan, Tanggal_Penjualan, Kadar_PA_Penjualan)
         st.success("Pelacakan berhasil ditambahkan.")
 
+# Fungsi Halaman Membuat Detail Qr code Produk Minyak Nilam
+def Minyaknilam():
+    st.title("Detail Qrcode Minyak Nilam")
+    Id_Minyak_Nilam_list = get_ids_from_db ("SELECT Id_Penyulingan FROM Table_Penyulingan")
+    Nama_Petani_list= get_ids_from_db ("SELECT Nama_Petani FROM Table_Petani")
+    Id_Minyak_Nilam = st.selectbox("Id_Minyak_Nilam",  Id_Minyak_Nilam_list)
+    Nama_Petani = st.selectbox("Nama Petani", Nama_Petani_list)
+    Jenis_Penyulingan = st.text_input("Masukkan Jenis Penyulingan")
+    Jumlah_minyak = st.text_input("Masukkan jumlah Minyak")
+    Lokasi = st.text_input("Masukkan Lokasi")
+    Nama_Pengepul_12 = st.text_input("Masukkan Nama Pengepul 1/2")
+    Tanggal_Penjualan_ke_Pengepul_12 = st.date_input("Tanggal_Penjualan_ke_Pengepul_1/2")
+    if st.button("Tambah detail Qrcode"):
+        add_Minyaknilam(Id_Minyak_Nilam, Nama_Petani, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,)
+        st.success("Pelacakan berhasil ditambahkan.")
+
 # Fungsi untuk menambahkan Pengepul_1 ke database
 def add_pengepul_1(Id_Petani, Id_Pengepul_1, Id_Produksi, Tanggal_Pembelian, Jp_Minyak_Dibeli, Jumlah_Pembelian, Kadar_PA_Pembelian, Tanggal_Penjualan, Kadar_PA_Penjualan, Jumlah_Penjualan):
     try:
@@ -225,14 +242,13 @@ def add_pengepul_2(Id_Petani, Id_Pengepul_1, Id_Pengepul_2, Id_Penyulingan, Jeni
     except sqlite3.Error as e:
         st.error(f"Kesalahan database: {e}")
 
-# Fungsi untuk menambahkan jejak traceability Petani ke database
-def add_traceability(Id_Petani, Nama, Asal, Alamat, Hasil_Panen):
+# Fungsi untuk menambahkan Pengepul_1 ke database
+def add_Minyaknilam(Id_Minyak_Nilam, Nama_Petani, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12):
     try:
-        with sqlite3.connect('data_nilam.db', timeout=10) as conn:
+        with sqlite3.connect('data_nilam.db') as conn:
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO Table_Petani ( Id_Petani, Nama, Asal, Alamat, Hasil_Panen) VALUES (?, ?, ?, ?, ?, ? )',
-                            ( Id_Petani, Nama, Asal, Alamat, Hasil_Panen))
-            conn.commit()
+            cursor.execute('INSERT INTO Table_Minyak_Nilam (Id_Minyak_Nilam, Nama_Petani, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+                           (Id_Minyak_Nilam, Nama_Petani, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12))
     except sqlite3.Error as e:
         st.error(f"Kesalahan database: {e}")
 
@@ -244,17 +260,6 @@ def get_ids_from_db(query):
     conn.close()
     return [item[0] for item in data]
     
-# Fungsi untuk menambahkan jejak traceability Produksi ke database
-def add_traceability(Id_Produksi, Luas_lahan, Jumlah_minyak, Tanggal_Produksi, Tanggal_penjualan):
-    try:
-        with sqlite3.connect('data_nilam.db', timeout=10) as conn:
-            cursor = conn.cursor()
-            cursor.execute('INSERT INTO Table_Produksi (Id_Produksi, Luas_lahan, Jumlah_minyak, Tanggal_Produksi, Tanggal_penjualan) VALUES (?, ?, ?, ?, ?)',
-                            (Id_Produksi, Luas_lahan, Jumlah_minyak, Tanggal_Produksi, Tanggal_penjualan))
-            conn.commit()
-    except sqlite3.Error as e:
-        st.error(f"Kesalahan database: {e}")
-
 # Fungsi untuk mendapatkan informasi lain dari database berdasarkan query
 def get_name_from_db(query):
     try:
@@ -285,26 +290,27 @@ def columns_for_table(table_name):
         'Table_Penyulingan': ["Id_Penyulingan"],
         'Table_Pengepul_1': ["Id_Pengepul_1"],
         'Table_Pengepul_2': ["Id_Pengepul_2"],    
+        'Table_Minyak_Nilam': ["Id_Pengepul_2"],    
     }
     return columns_dict.get(table_name, ["Id"])
 
-# Fungsi untuk mengambil data Penyulingan berdasarkan Id_Penyulingan
-def get_product_info(Id_Penyulingan):
+# Fungsi untuk mengambil data Minyak Nilam berdasarkan Id_Minyak_Nilam
+def get_product_info(Id_Minyak_Nilam):
     conn = sqlite3.connect('data_nilam.db')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM Table_Penyulingan WHERE Id_Penyulingan=?", (Id_Penyulingan,))
+    cursor.execute("SELECT * FROM Table_Minyak_Nilam WHERE Id_Minyak_Nilam=?", (Id_Minyak_Nilam,))
     data = cursor.fetchone()
 
     conn.close()
     return data
 
 # Fungsi untuk mengambil data produk berdasarkan Id_Produk
-def get_product_from_db(Id_Penyulingan):
+def get_product_from_db(Id_Minyak_Nilam):
     conn = sqlite3.connect('data_')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM Table_Penyulingan WHERE Id_Penyulingan=?", (Id_Penyulingan,))
+    cursor.execute("SELECT * FROM Table_Minyak_Nilam WHERE Id_Penyulingan=?", (Id_Minyak_Nilam,))
     data = cursor.fetchone()
 
     conn.close()
@@ -318,45 +324,45 @@ def generate():
     st.title("QR Code Generator")
      
     # Input penyulingan dari pengguna
-    Id_Penyulingan_list = get_ids_from_db("SELECT Id_Penyulingan FROM Table_Penyulingan")
-    Id_Penyulingan = st.selectbox("Id_Penyulingan", Id_Penyulingan_list)
+    Id_Minyak_Nilam_list = get_ids_from_db("SELECT Id_Minyak_Nilam FROM Table_Minyak_Nilam")
+    Id_Minyak_Nilam = st.selectbox("Id_Minyak_Nilam", Id_Minyak_Nilam_list)
     
-    if Id_Penyulingan:
-        # Mendapatkan tanggal produksi berdasarkan Id_Produksi yang dipilih
-        Tanggal_Penyulingan = get_name_from_db(f"SELECT Tanggal_Penyulingan FROM Table_Penyulingan WHERE Id_Penyulingan = '{Id_Penyulingan}'")
+    if Id_Minyak_Nilam:
+        # Mendapatkan tanggal produksi berdasarkan Id_Minyak_Nilam yang dipilih
+        Tanggal_Penjualan_ke_Pengepul_12 = get_name_from_db(f"SELECT Tanggal_Penjualan_ke_Pengepul_12 FROM Table_Minyak_Nilam WHERE Id_Minyak_Nilam = '{Id_Minyak_Nilam}'")
         
-        if Tanggal_Penyulingan:
-            st.write(f"Tanggal_Penyulingan: {Tanggal_Penyulingan}") 
+        if Tanggal_Penjualan_ke_Pengepul_12:
+            st.write(f"Tanggal_Penjualan_ke_Pengepul_12: {Tanggal_Penjualan_ke_Pengepul_12}") 
             
             if st.button("Generate QR Code"):
                 # Generate QR code data
                 link = "https://webminyaknilam.streamlit.app//?"
-                data = f"{link}Id_Penyulingan={Id_Penyulingan}"
+                data = f"{link}Id_Minyak_Nilam={Id_Minyak_Nilam}"
                 qr_image = segno.make(data)
 
                 # Menyimpan gambar QR code sementara
                 if not os.path.exists(generated_qrcodes_path):
                     os.makedirs(generated_qrcodes_path)
                     
-                qr_file_path = os.path.join(generated_qrcodes_path, f"qr_code_{Tanggal_Penyulingan}.png")
+                qr_file_path = os.path.join(generated_qrcodes_path, f"qr_code_{Tanggal_Penjualan_ke_Pengepul_12}.png")
                 qr_image.save(qr_file_path)
 
                 # Menampilkan QR code di Streamlit
                 st.image(qr_file_path, caption=" Hasil Qr Code Untuk Id Penyulingan", use_column_width=False)
                 
                 # Menampilkan informasi terkait (gabungan Id Produksi dan link)
-                st.write(f"{link}Id_Penyulingan={Id_Penyulingan}")
+                st.write(f"{link}Id_Minyak_Nilam={Id_Minyak_Nilam}")
         
                 # Tombol untuk menyimpan QR code
                 with open(qr_file_path, "rb") as file:
                     st.download_button(
                         label="Download QR Code",
                         data=file,
-                        file_name=f"qr_code_{Id_Penyulingan}.png",
+                        file_name=f"qr_code_{Id_Minyak_Nilam}.png",
                         mime="image/png"
                     )
         else:
-            st.error("Tanggal penyulingan tidak ditemukan. Pastikan Id Penyulingan valid.")
+            st.error("Tanggal Penjualan ke Pengepul 1 atau 2 tidak ditemukan. Pastikan Id Mianyak Nlam valid.")
 
 # Fungsi untuk halaman Penelusuran
 def penelusuran(Id_Penyulingan=None):
@@ -367,45 +373,53 @@ def penelusuran(Id_Penyulingan=None):
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Table_Penyulingan (
             Id_Penyulingan TEXT PRIMARY KEY,
+            Id_Minyak_Nilam
             Jenis_Penyulingan TEXT,
             Jumlah_Minyak TEXT,
             Kadar_PA TEXT,
-            Lokasi INTEGER,
-            Tanggal_Penyulingan INTEGER,
-            Tanggal_Penjualan INTEGER
-        )
+            Lokasi TEXT,
+            Tanggal_Penyulingan TEXT,
+            Tanggal_Penjualan TEXT
+                    )
     ''')
 
     # Membuat tabel produk untuk detail produk
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Table_Minyak_Nilam (
-            Id_Produk TEXT PRIMARY KEY,
-            Nama_Produk TEXT,
-            Bau TEXT,
-            Kadar Minyak TEXT,
-            Gambar BLOB
+            Id_Penyulingan TEXT PRIMARY KEY,
+            Nama_Petani_atau_Penyuling, TEXT
+            Jenis_Penyulingan TEXT,
+            Jumlah_Minyak TEXT,
+            Lokasi TEXT,
+            Tanggal_Penjualan_ke_Pengepul, TEXT
+            Nama_Pengepul_12, TEXT
+            Gambar BLOB  
                     )
     ''')
 
     conn.commit()
     conn.close()
-    if Id_Penyulingan:
-        product_info = get_product_info(Id_Penyulingan) 
+    if Minyaknilam:
+        product_info = get_product_info(Minyaknilam) 
         if product_info:
             st.write(f"**Tanggal Penyulingan:** {product_info[7]}")
             
             # Menampilkan detail produk dari Id_
-            Id_Penyulingan_to_view = product_info[1]
-            if Id_Penyulingan_to_view:
-                product_info_detail = get_product_from_db(Id_Penyulingan_to_view)
+            Minyaknilam_to_view = product_info[1]
+            if Minyaknilam_to_view:
+                product_info_detail = get_product_from_db(Minyaknilam_to_view)
                 if product_info_detail:
-                    st.write(f"**Nama Petani:** {product_info_detail[1]}")
-                    st.write(f"*Asal Produk:** {product_info_detail[2]}")
-                    st.write(f"**Kadar Minyak:** {product_info_detail[3]}")
-                    
+                    st.write(f"**Nama Petani atau Penyuling:** {product_info_detail[1]}")
+                    st.write(f"**Jenis Penyulingan:** {product_info_detail[2]}")
+                    st.write(f"**Jumlah_Minyak:** {product_info_detail[3]}")
+                    st.write(f"**Jumlah Minyak:** {product_info_detail[4]}")
+                    st.write(f"*Lokasi:** {product_info_detail[5]}")
+                    st.write(f"**Tanggal Penjualan ke Pengepul:** {product_info_detail[6]}")
+                    st.write(f"**Nama Pengepul 1 atau 2:** {product_info_detail[7]}")
+
                     # Menampilkan gambar jika ada
                     if product_info_detail[4]:
-                        image_db = Image.open(io.BytesIO(product_info_detail[4]))
+                        image_db = Image.open(io.BytesIO(product_info_detail[8]))
                         st.image(image_db, caption='Gambar dari Database SQLite', use_column_width=True)
                     else:
                         st.info("Tidak ada gambar untuk produk ini.")
@@ -414,8 +428,8 @@ def penelusuran(Id_Penyulingan=None):
             else:
                 st.warning("ID Produk tidak ditemukan.")
             
-             # Menampilkan peta lokasi pemasok
-            st.header("Alamat Pemasok Nilam Aceh")
+             # Menampilkan peta lokasi petani
+            st.header("Alamat Petani Nilam Aceh")
 
             # Koordinat lokasi Pemasok
             lokasi = [723.7565169210094, 95.58097307482704]  # Lokasi aceh jaya
@@ -470,7 +484,7 @@ def penelusuran(Id_Penyulingan=None):
 
 def main():
     st.sidebar.title("Navigasi")
-    menu = ["Home", "Penelusuran", "Generate QR code", "Petani", "Penyuling", "Pengepul 1", "Pengepul 2"]
+    menu = ["Home", "Penelusuran", "Generate QR code", "Petani", "Penyuling", "Pengepul 1", "Pengepul 2", "Minyak Nilam"]
     page = st.sidebar.selectbox("MENU", menu) 
     st.sidebar.info("SELAMAT DATANG USER MINYAK NILAM")
 
@@ -488,13 +502,14 @@ def main():
         pengepul_1()
     elif page == "Pengepul 2": 
         pengepul_2()
+    elif page == "Minyak Nilam": 
+        Minyaknilam()
     elif page== "Home":
         home()  # Redirect to Home page after logout
         
 if __name__ == '__main__':
     main()
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">', unsafe_allow_html=True)
-   
 
 
 
