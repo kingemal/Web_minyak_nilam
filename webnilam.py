@@ -399,8 +399,8 @@ def penelusuran(Id_Minyak_Nilam=None):
 
     conn.commit()
     conn.close()
-    if Id_Minyak_nilam:
-        product_info = get_product_info(Id_Minyak_nilam) 
+    if Id_Minyak_Nilam:
+        product_info = get_product_info(Id_Minyak_Nilam) 
         if product_info:
             st.write(f"**Tanggal Penyulingan:** {product_info[7]}")
             
