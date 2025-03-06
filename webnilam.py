@@ -365,7 +365,7 @@ def generate():
             st.error("Tanggal Penjualan ke Pengepul 1 atau 2 tidak ditemukan. Pastikan Id Mianyak Nlam valid.")
 
 # Fungsi untuk halaman Penelusuran
-def penelusuran(Id_Penyulingan=None):
+def penelusuran(Id_Minyak_Nilam=None):
     conn = sqlite3.connect('data_nilam.db')
     cursor = conn.cursor()
 
