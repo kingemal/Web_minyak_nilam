@@ -405,9 +405,9 @@ def penelusuran(Id_Minyak_Nilam=None):
             st.write(f"**Tanggal Penyulingan:** {product_info[7]}")
             
             # Menampilkan detail produk dari Id_
-            Minyaknilam_to_view = product_info[1]
-            if Id_Minyak_nilam_to_view:
-                product_info_detail = get_product_from_db(Id_Minyak_nilam_to_view)
+            id_product_to_view = product_info[1]
+            if product_to_view:
+                product_info_detail = get_product_from_db(id_produk_to_view)
                 if product_info_detail:
                     st.write(f"**Nama Petani atau Penyuling:** {product_info_detail[1]}")
                     st.write(f"**Jenis Penyulingan:** {product_info_detail[2]}")
