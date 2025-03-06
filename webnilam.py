@@ -290,7 +290,7 @@ def columns_for_table(table_name):
         'Table_Penyulingan': ["Id_Penyulingan"],
         'Table_Pengepul_1': ["Id_Pengepul_1"],
         'Table_Pengepul_2': ["Id_Pengepul_2"],    
-        'Table_Minyak_Nilam': ["Id_Pengepul_2"],    
+        'Table_Minyak_Nilam': ["Id_Minyak_Nilam"],    
     }
     return columns_dict.get(table_name, ["Id"])
 
@@ -391,7 +391,7 @@ def penelusuran(Id_Penyulingan=None):
             Jenis_Penyulingan TEXT,
             Jumlah_Minyak TEXT,
             Lokasi TEXT,
-            Tanggal_Penjualan_ke_Pengepul, TEXT
+            Tanggal_Penjualan_ke_Pengepul_12, TEXT
             Nama_Pengepul_12, TEXT
             Gambar BLOB  
                     )
@@ -399,15 +399,15 @@ def penelusuran(Id_Penyulingan=None):
 
     conn.commit()
     conn.close()
-    if Minyaknilam:
-        product_info = get_product_info(Minyaknilam) 
+    if Id_Minyak_nilam:
+        product_info = get_product_info(Id_Minyak_nilam) 
         if product_info:
             st.write(f"**Tanggal Penyulingan:** {product_info[7]}")
             
             # Menampilkan detail produk dari Id_
             Minyaknilam_to_view = product_info[1]
-            if Minyaknilam_to_view:
-                product_info_detail = get_product_from_db(Minyaknilam_to_view)
+            if Id_Minyak_nilam_to_view:
+                product_info_detail = get_product_from_db(Id_Minyak_nilam_to_view)
                 if product_info_detail:
                     st.write(f"**Nama Petani atau Penyuling:** {product_info_detail[1]}")
                     st.write(f"**Jenis Penyulingan:** {product_info_detail[2]}")
