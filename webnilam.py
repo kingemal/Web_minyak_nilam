@@ -598,34 +598,7 @@ def main():
         logout()
         home()  # Redirect to Home page after logout
     else:
-        st.sidebar.warning("Silakan login terlebih dahulu untuk mengakses halaman ini.")
-
-
-def main():
-    st.sidebar.title("Navigasi")
-    menu = ["Home", "Penelusuran", "Generate QR code", "Petani", "Penyuling", "Pengepul 1", "Pengepul 2", "Minyak Nilam"]
-    page = st.sidebar.selectbox("MENU", menu) 
-    st.sidebar.info("SELAMAT DATANG USER MINYAK NILAM")
-
-    if page == "Home":
-        home()
-    elif page == "Penelusuran":
-        penelusuran()
-    elif page == "Generate QR code":
-        generate()
-    elif page == "Petani": 
-        petani()
-    elif page == "Penyuling":
-        penyuling()
-    elif page == "Pengepul 1":
-        pengepul_1()
-    elif page == "Pengepul 2": 
-        pengepul_2()
-    elif page == "Minyak Nilam": 
-        Minyaknilam()
-    elif page== "Home":
-        home()  # Redirect to Home page after logout
-        
+        st.sidebar.warning("Silakan login terlebih dahulu untuk mengakses halaman ini.")     
 if __name__ == '__main__':
     main()
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">', unsafe_allow_html=True)
