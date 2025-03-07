@@ -294,12 +294,12 @@ def columns_for_table(table_name):
     }
     return columns_dict.get(table_name, ["Id"])
 
-# Fungsi untuk mengambil data Minyak Nilam berdasarkan Id_Minyak_Nilam
-def get_product_info(Id_Minyak_Nilam):
+# Fungsi untuk mengambil data penyulingan berdasarkan Id penyuling
+def get_product_info(Id_Penyulingan):
     conn = sqlite3.connect('data_nilam.db')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM Table_Minyak_Nilam WHERE Id_Minyak_Nilam=?", (Id_Minyak_Nilam,))
+    cursor.execute("SELECT * FROM Table_Penyulingan WHERE Id_Penyulingan=?", (Id_Penyulingan,))
     data = cursor.fetchone()
 
     conn.close()
@@ -307,10 +307,10 @@ def get_product_info(Id_Minyak_Nilam):
 
 # Fungsi untuk mengambil data produk berdasarkan Id_Produk
 def get_product_from_db(Id_Minyak_Nilam):
-    conn = sqlite3.connect('data_')
+    conn = sqlite3.connect('data_nilam')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM Table_Minyak_Nilam WHERE Id_Penyulingan=?", (Id_Minyak_Nilam,))
+    cursor.execute("SELECT * FROM Table_Minyak_Nilam WHERE Id_Minyak_Nilamn=?", (Id_Minyak_Nilam,))
     data = cursor.fetchone()
 
     conn.close()
@@ -391,7 +391,7 @@ def penelusuran(Id_Minyak_Nilam=None):
             Jenis_Penyulingan TEXT,
             Jumlah_Minyak TEXT,
             Lokasi TEXT,
-            Tanggal_Penjualan_ke_Pengepul_12, TEXT
+            Tanggal_Penjualan_ke_Pengepul, TEXT
             Nama_Pengepul_12, TEXT
             Gambar BLOB  
                     )
@@ -402,21 +402,22 @@ def penelusuran(Id_Minyak_Nilam=None):
     if Id_Minyak_Nilam:
         product_info = get_product_info(Id_Minyak_Nilam) 
         if product_info:
-            st.write(f"**Tanggal Penjualan ke Pengepul 1/2:** {product_info[4]}")
+            st.write(f"**Tanggal Penyulingan:** {product_info[7]}")
             
-            # Menampilkan detail produk dari Id_
+            # Menampilkan detail produk dari Id_Minyak_Nilam
             id_product_to_view = product_info[1]
-            if product_to_view:
-                product_info_detail = get_product_from_db(id_produk_to_view)
+            if id_product_to_view:
+                product_info_detail = get_product_from_db(id_product_to_view)
                 if product_info_detail:
-                    st.write(f"**Jenis Penyulingan:** {product_info_detail[1]}")
-                    st.write(f"**Jumlah_Minyak:** {product_info_detail[2]}")
-                    st.write(f"*Lokasi:** {product_info_detail[3]}")
-                    st.write(f"**Nama Petani atau Penyuling:** {product_info_detail[5]}")
+                    st.write(f"**Nama Petani atau Penyuling:** {product_info_detail[1]}")
+                    st.write(f"**Jenis Penyulingan:** {product_info_detail[2]}")
+                    st.write(f"**Jumlah_Minyak:** {product_info_detail[3]}")
+                    st.write(f"**Jumlah Minyak:** {product_info_detail[4]}")
+                    st.write(f"*Lokasi:** {product_info_detail[5]}")
                     st.write(f"**Nama Pengepul 1 atau 2:** {product_info_detail[6]}")
 
                     # Menampilkan gambar jika ada
-                    if product_info_detail[7]:
+                    if product_info_detail[4]:
                         image_db = Image.open(io.BytesIO(product_info_detail[8]))
                         st.image(image_db, caption='Gambar dari Database SQLite', use_column_width=True)
                     else:
@@ -480,6 +481,77 @@ def penelusuran(Id_Minyak_Nilam=None):
     else:
         st.error('ID Produksi tidak ditemukan.')
 
+ # Periksa query params ketika aplikasi dijalankan
+    query_params = st.experimental_get_query_params()
+    Id_Minyak_Nilam = query_params.get('Id_Minyak_Nilam', [None])[0]
+    
+    # Jika Id_Produksi diberikan di URL, langsung ke halaman Penelusuran
+    if Id_Minyak_Nilam:
+        penelusuran(Id_Minyak_Nilam)
+        return  # Exit the main function to prevent further processing
+    
+def signup():
+    st.write("Sign Up Page")
+    username = st.text_input("New Username")
+    email = st.text_input("Email")
+    password = st.text_input("New Password", type="password")
+    role = st.selectbox("Role", ["Administrasi", "Retailer", "Distribusi"])
+    
+    if st.button("Sign Up"):
+        conn = sqlite3.connect('data_informasi.db')
+        c = conn.cursor()
+        
+        if role == "Administrasi":
+            table_name = 'admin_users'
+        elif role == "Retailer":
+            table_name = 'retailer_users'
+        elif role == "Distribusi":
+            table_name = 'distribusi_users'
+        
+        c.execute(f'INSERT INTO {table_name} (username, email, password) VALUES (?, ?, ?)', (username, email, password))
+        conn.commit()
+        conn.close()
+        st.success("User created successfully")
+
+## Fungsi untuk log out
+def logout():
+    st.session_state.logged_in = False
+    st.session_state.username = ""
+    st.sidebar.success("Anda telah berhasil keluar. Menuju ke halaman Home...")
+    st.session_state.page = "Home"  # Set halaman tujuan setelah logout
+
+def login():
+    st.write("Login Page")
+    email = st.text_input("Email")
+    password = st.text_input("Password", type="password")
+    role = st.selectbox("Login as", ["Petani", "Penyuling", "Pengepul 1", "Pengepul 2"])
+    
+    if st.button("Login"):
+        conn = sqlite3.connect('data_nilam.db')
+        c = conn.cursor()
+        
+        if role == "Petani":
+            table_name = 'Petani_users'
+        elif role == "Penyuling":
+            table_name = 'Penyuling_users'
+        elif role == "Pengepul 1":
+            table_name = 'Pengepul1_users'
+        elif role == "Pengepul 2":
+            table_name = 'Pengepul2_user'
+        
+        # Assuming hashed_password is directly used; in a real application, it should be hashed
+        hashed_password = password
+        c.execute(f'SELECT * FROM {table_name} WHERE email = ? AND password = ?', (email, hashed_password))
+        user = c.fetchone()
+        conn.close()
+        
+        if user:
+            st.session_state.logged_in = True
+            st.session_state.role = role.lower()  # store role in lowercase to match with menu conditions
+            st.experimental_rerun()  # Refresh the page to show the correct menu
+        else:
+            st.error("Invalid credentials")
+
 def main():
     st.sidebar.title("Navigasi")
     menu = ["Home", "Penelusuran", "Generate QR code", "Petani", "Penyuling", "Pengepul 1", "Pengepul 2", "Minyak Nilam"]
@@ -508,3 +580,6 @@ def main():
 if __name__ == '__main__':
     main()
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">', unsafe_allow_html=True)
+
+
+
