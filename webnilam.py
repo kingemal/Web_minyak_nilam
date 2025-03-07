@@ -207,17 +207,17 @@ def pengepul_2():
 # Fungsi Halaman Membuat Detail Qr code Produk Minyak Nilam
 def Minyaknilam():
     st.title("Detail Qrcode Minyak Nilam")
+    Id_Penyulingan_list = get_ids_from_db ("SELECT Id_Penyulingan FROM Table_Penyulingan")
     Id_Minyak_Nilam_list = get_ids_from_db ("SELECT Id_Penyulingan FROM Table_Penyulingan")
-    Nama_Petani_list= get_ids_from_db ("SELECT Nama_Petani FROM Table_Petani")
     Id_Minyak_Nilam = st.selectbox("Id_Minyak_Nilam",  Id_Minyak_Nilam_list)
-    Nama_Petani = st.selectbox("Nama Petani", Nama_Petani_list)
+    Id_Penyulingan = st.selectbox("Id_Id_Penyulingan",  Id_Penyulingan_list)
     Jenis_Penyulingan = st.text_input("Masukkan Jenis Penyulingan")
     Jumlah_minyak = st.text_input("Masukkan jumlah Minyak")
     Lokasi = st.text_input("Masukkan Lokasi")
     Nama_Pengepul_12 = st.text_input("Masukkan Nama Pengepul 1/2")
     Tanggal_Penjualan_ke_Pengepul_12 = st.date_input("Tanggal_Penjualan_ke_Pengepul_1/2")
     if st.button("Tambah detail Qrcode"):
-        add_Minyaknilam(Id_Minyak_Nilam, Nama_Petani, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,)
+        add_Minyaknilam(Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,)
         st.success("Pelacakan berhasil ditambahkan.")
 
 # Fungsi untuk menambahkan Pengepul_1 ke database
@@ -243,12 +243,12 @@ def add_pengepul_2(Id_Petani, Id_Pengepul_1, Id_Pengepul_2, Id_Penyulingan, Jeni
         st.error(f"Kesalahan database: {e}")
 
 # Fungsi untuk menambahkan Pengepul_1 ke database
-def add_Minyaknilam(Id_Minyak_Nilam, Nama_Petani, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12):
+def add_Minyaknilam(Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,):
     try:
         with sqlite3.connect('data_nilam.db') as conn:
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO Table_Minyak_Nilam (Id_Minyak_Nilam, Nama_Petani, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-                           (Id_Minyak_Nilam, Nama_Petani, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12))
+            cursor.execute('INSERT INTO Table_Minyak_Nilam (Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+                           (Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,))
     except sqlite3.Error as e:
         st.error(f"Kesalahan database: {e}")
 
@@ -324,48 +324,48 @@ def generate():
     st.title("QR Code Generator")
      
     # Input penyulingan dari pengguna
-    Id_Minyak_Nilam_list = get_ids_from_db("SELECT Id_Minyak_Nilam FROM Table_Minyak_Nilam")
-    Id_Minyak_Nilam = st.selectbox("Id_Minyak_Nilam", Id_Minyak_Nilam_list)
+    Id_Penyulingan_list = get_ids_from_db("SELECT Id_Penyulingan FROM Table_Penyulingan")
+    Id_Penyulingan = st.selectbox("Id_Penyulingan", Id_Penyulingan_list)
     
-    if Id_Minyak_Nilam:
-        # Mendapatkan tanggal produksi berdasarkan Id_Minyak_Nilam yang dipilih
-        Tanggal_Penjualan_ke_Pengepul_12 = get_name_from_db(f"SELECT Tanggal_Penjualan_ke_Pengepul_12 FROM Table_Minyak_Nilam WHERE Id_Minyak_Nilam = '{Id_Minyak_Nilam}'")
+    if Id_Penyulingan:
+        # Mendapatkan tanggal produksi berdasarkan Id_Penyulingan yang dipilih
+        Tanggal_Penjualan = get_name_from_db(f"SELECT Tanggal_Penjualan FROM Table_Penyulingan WHERE Id_Penyulingan = '{Id_Penyulingan}'")
         
-        if Tanggal_Penjualan_ke_Pengepul_12:
-            st.write(f"Tanggal_Penjualan_ke_Pengepul_12: {Tanggal_Penjualan_ke_Pengepul_12}") 
+        if Tanggal_Penjualan:
+            st.write(f"Tanggal_Penjualan_ke_Pengepul_12: {Tanggal_Penjualan}") 
             
             if st.button("Generate QR Code"):
                 # Generate QR code data
                 link = "https://webminyaknilam.streamlit.app//?"
-                data = f"{link}Id_Minyak_Nilam={Id_Minyak_Nilam}"
+                data = f"{link}Id_Penyulingan={Id_Penyulingan}"
                 qr_image = segno.make(data)
 
                 # Menyimpan gambar QR code sementara
                 if not os.path.exists(generated_qrcodes_path):
                     os.makedirs(generated_qrcodes_path)
                     
-                qr_file_path = os.path.join(generated_qrcodes_path, f"qr_code_{Tanggal_Penjualan_ke_Pengepul_12}.png")
+                qr_file_path = os.path.join(generated_qrcodes_path, f"qr_code_{Tanggal_Penjualan}.png")
                 qr_image.save(qr_file_path)
 
                 # Menampilkan QR code di Streamlit
                 st.image(qr_file_path, caption=" Hasil Qr Code Untuk Id Penyulingan", use_column_width=False)
                 
                 # Menampilkan informasi terkait (gabungan Id Produksi dan link)
-                st.write(f"{link}Id_Minyak_Nilam={Id_Minyak_Nilam}")
+                st.write(f"{link}Id_Penyulingan={Id_Penyulingan}")
         
                 # Tombol untuk menyimpan QR code
                 with open(qr_file_path, "rb") as file:
                     st.download_button(
                         label="Download QR Code",
                         data=file,
-                        file_name=f"qr_code_{Id_Minyak_Nilam}.png",
+                        file_name=f"qr_code_{Id_Penyulingan}.png",
                         mime="image/png"
                     )
         else:
             st.error("Tanggal Penjualan ke Pengepul 1 atau 2 tidak ditemukan. Pastikan Id Mianyak Nlam valid.")
 
 # Fungsi untuk halaman Penelusuran
-def penelusuran( Id_Penyulingan=None):
+def penelusuran(Id_Penyulingan=None):
     conn = sqlite3.connect('data_nilam.db')
     cursor = conn.cursor()
 
@@ -400,14 +400,14 @@ def penelusuran( Id_Penyulingan=None):
     conn.commit()
     conn.close()
     if Id_Penyulingan:
-        product_info = get_product_info( Id_Penyulingan) 
+        product_info = get_product_info(Id_Penyulingan) 
         if product_info:
             st.write(f"**Tanggal Penyulingan:** {product_info[7]}")
             
             # Menampilkan detail produk dari Id_Minyak_Nilam
-            id_product_to_view = product_info[1]
-            if id_product_to_view:
-                product_info_detail = get_product_from_db(id_product_to_view)
+            id_Minyak_Nilam_to_view = product_info[1]
+            if id_Minyak_Nilam_to_view:
+                product_info_detail = get_product_from_db(id_Minyak_Nilam_to_view)
                 if product_info_detail:
                     st.write(f"**Nama Petani atau Penyuling:** {product_info_detail[1]}")
                     st.write(f"**Jenis Penyulingan:** {product_info_detail[2]}")
@@ -481,45 +481,6 @@ def penelusuran( Id_Penyulingan=None):
     else:
         st.error('ID Produksi tidak ditemukan.')
 
-def main():
-    # Initialize session state if not already set
-    if 'logged_in' not in st.session_state:
-        st.session_state.logged_in = False
-        st.session_state.role = ""
-
-    st.sidebar.title("Navigasi")
-    
-    # Periksa query params ketika aplikasi dijalankan
-    query_params = st.experimental_get_query_params()
-    Id_Penyulingan = query_params.get('Id_Penyulingan',[None][0])
-
-    # Set query parameters di URL
-    st.experimental_set_query_params(page="3", user="admin")
-    st.write("Query parameters telah diperbarui!")
-    # Ambil parameter dari URL
-    query_params = st.experimental_get_query_params()
-    page = query_params.get("page", ["Penelusuran"])[0]
-
-    # Fungsi untuk mengubah halaman
-    def change_page(penelusuran):
-        st.experimental_set_query_params(page=penelusuran)
-
-    # Tampilan berdasarkan parameter
-    if page == "Home":
-     st.title("Halaman Utama")
-    if st.button("Ke Halaman Penelusuran"):
-        change_page("Penelusuran")
-
-    elif page == "page2":
-     st.title("Halaman 2")
-     if st.button("Kembali ke Home"):
-            change_page("home")
-    
-    # Jika Id_Produksi diberikan di URL, langsung ke halaman Penelusuran
-    if  Id_Penyulingan:
-        penelusuran(Id_Penyulingan)
-        return  # Exit the main function to prevent further processing
-    
 def signup():
     st.write("Sign Up Page")
     username = st.text_input("New Username")
@@ -528,7 +489,7 @@ def signup():
     role = st.selectbox("Role", ["Administrasi", "Retailer", "Distribusi"])
     
     if st.button("Sign Up"):
-        conn = sqlite3.connect('data_informasi.db')
+        conn = sqlite3.connect('data_nilam.db')
         c = conn.cursor()
         
         if role == "Administrasi":
@@ -543,7 +504,7 @@ def signup():
         conn.close()
         st.success("User created successfully")
 
-## Fungsi untuk log out
+# Fungsi untuk log out
 def logout():
     st.session_state.logged_in = False
     st.session_state.username = ""
@@ -581,6 +542,64 @@ def login():
             st.experimental_rerun()  # Refresh the page to show the correct menu
         else:
             st.error("Invalid credentials")
+
+
+def main():
+    # Initialize session state if not already set
+    if 'logged_in' not in st.session_state:
+        st.session_state.logged_in = False
+        st.session_state.role = ""
+
+    st.sidebar.title("Navigasi")
+    
+    # Periksa query params ketika aplikasi dijalankan
+    query_params = st.experimental_get_query_params()
+    Id_Penyulingan = query_params.get('Id_Penyulingan',[None][0])
+
+    # Jika Id_Produksi diberikan di URL, langsung ke halaman Penelusuran
+    if  Id_Penyulingan:
+        penelusuran(Id_Penyulingan)
+        return  # Exit the main function to prevent further processing
+    
+    if st.session_state.logged_in:
+        if st.session_state.role == "Petani":
+            menu = ["Home", "Petani", "Log Out"]
+        elif st.session_state.role == "penyuling":
+            menu = ["Home", "Penyulingan", "Log Out"]
+        elif st.session_state.role == "Pengepul 2":
+            menu = ["Home", "Penelusuran", "Generate QR code", "Petani", "Penyuling", "Pengepul 1", "Pengepul 2", "Minyak Nilam", "SignUp", "Log Out"]
+    else:
+        menu = ["Home", "Login"]
+
+    choice = st.sidebar.selectbox("Navigasi", menu)
+    st.sidebar.info("SELAMAT DATANG USER MINYAK NILAM")
+
+    if choice == "Home":
+        home()
+    elif choice == "Login":
+        login()
+    elif choice == "SignUp" and st.session_state.logged_in:
+        signup()
+    elif choice == "Penelusuran":
+        penelusuran()
+    elif choice == "Generate QR code" and st.session_state.logged_in:
+        generate()
+    elif choice == "Petani" and st.session_state.logged_in:
+        petani()
+    elif choice == "Penyulingan" and st.session_state.logged_in:
+        penyuling()
+    elif choice == "Pengepul_1" and st.session_state.logged_in:
+        pengepul_1()
+    elif choice == "Pengepul_2" and st.session_state.logged_in:
+        pengepul_2()
+    elif choice == "Minyak nilam" and st.session_state.logged_in:
+        Minyaknilam()
+    elif choice == "Log Out" and st.session_state.logged_in:
+        logout()
+        home()  # Redirect to Home page after logout
+    else:
+        st.sidebar.warning("Silakan login terlebih dahulu untuk mengakses halaman ini.")
+
 
 def main():
     st.sidebar.title("Navigasi")
