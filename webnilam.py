@@ -365,7 +365,7 @@ def generate():
             st.error("Tanggal Penjualan ke Pengepul 1 atau 2 tidak ditemukan. Pastikan Id Mianyak Nlam valid.")
 
 # Fungsi untuk halaman Penelusuran
-def penelusuran(Id_Minyak_Nilam=None):
+def penelusuran( Id_Penyulingan=None):
     conn = sqlite3.connect('data_nilam.db')
     cursor = conn.cursor()
 
@@ -399,8 +399,8 @@ def penelusuran(Id_Minyak_Nilam=None):
 
     conn.commit()
     conn.close()
-    if Id_Minyak_Nilam:
-        product_info = get_product_info(Id_Minyak_Nilam) 
+    if Id_Penyulingan:
+        product_info = get_product_info( Id_Penyulingan) 
         if product_info:
             st.write(f"**Tanggal Penyulingan:** {product_info[7]}")
             
@@ -481,13 +481,43 @@ def penelusuran(Id_Minyak_Nilam=None):
     else:
         st.error('ID Produksi tidak ditemukan.')
 
- # Periksa query params ketika aplikasi dijalankan
-    query_params = st.query_params[Id_Minyak_Nilam]()
-    Id_Minyak_Nilam = query_params.get('Id_Minyak_Nilam', [None])[0]
+def main():
+    # Initialize session state if not already set
+    if 'logged_in' not in st.session_state:
+        st.session_state.logged_in = False
+        st.session_state.role = ""
+
+    st.sidebar.title("Navigasi")
+    
+    # Periksa query params ketika aplikasi dijalankan
+    query_params = st.experimental_get_query_params()
+    Id_Penyulingan = query_params.get('Id_Penyulingan',[None][0])
+
+    # Set query parameters di URL
+    st.experimental_set_query_params(page="3", user="admin")
+    st.write("Query parameters telah diperbarui!")
+    # Ambil parameter dari URL
+    query_params = st.experimental_get_query_params()
+    page = query_params.get("page", ["Penelusuran"])[0]
+
+    # Fungsi untuk mengubah halaman
+    def change_page(penelusuran):
+        st.experimental_set_query_params(page=penelusuran)
+
+    # Tampilan berdasarkan parameter
+    if page == "Home":
+     st.title("Halaman Utama")
+    if st.button("Ke Halaman Penelusuran"):
+        change_page("Penelusuran")
+
+    elif page == "page2":
+     st.title("Halaman 2")
+     if st.button("Kembali ke Home"):
+            change_page("home")
     
     # Jika Id_Produksi diberikan di URL, langsung ke halaman Penelusuran
-    if Id_Minyak_Nilam:
-        penelusuran(Id_Minyak_Nilam)
+    if  Id_Penyulingan:
+        penelusuran(Id_Penyulingan)
         return  # Exit the main function to prevent further processing
     
 def signup():
