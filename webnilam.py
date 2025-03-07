@@ -482,7 +482,7 @@ def penelusuran(Id_Minyak_Nilam=None):
         st.error('ID Produksi tidak ditemukan.')
 
  # Periksa query params ketika aplikasi dijalankan
-    query_params = st.experimental_get_query_params()
+    query_params = st.query_params[Id_Minyak_Nilam]()
     Id_Minyak_Nilam = query_params.get('Id_Minyak_Nilam', [None])[0]
     
     # Jika Id_Produksi diberikan di URL, langsung ke halaman Penelusuran
