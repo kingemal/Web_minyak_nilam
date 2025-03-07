@@ -528,7 +528,7 @@ def login():
         elif role == "Pengepul 1":
             table_name = 'Pengepul1_users'
         elif role == "Pengepul 2":
-            table_name = 'Pengepul2_user'
+            table_name = 'Pengepul2_users'
         
         # Assuming hashed_password is directly used; in a real application, it should be hashed
         hashed_password = password
@@ -537,7 +537,7 @@ def login():
         conn.close()
         
         if user:
-            st.session_state.logged_in = True
+            st.session_state.loggin = True
             st.session_state.role = role.lower()  # store role in lowercase to match with menu conditions
             st.experimental_rerun()  # Refresh the page to show the correct menu
         else:
@@ -566,13 +566,14 @@ def main():
             menu = ["Home", "Petani", "Log Out"]
         elif st.session_state.role == "penyuling":
             menu = ["Home", "Penyulingan", "Log Out"]
+        elif st.session_state.role == "Pengepul1_users":
+            menu = ["Home", "Pengepul 1", "Log Out"]
         elif st.session_state.role == "Pengepul 2":
             menu = ["Home", "Penelusuran", "Generate QR code", "Petani", "Penyuling", "Pengepul 1", "Pengepul 2", "Minyak Nilam", "SignUp", "Log Out"]
     else:
         menu = ["Home", "Login"]
 
     choice = st.sidebar.selectbox("Navigasi", menu)
-    st.sidebar.info("SELAMAT DATANG USER MINYAK NILAM")
 
     if choice == "Home":
         home()
@@ -598,7 +599,8 @@ def main():
         logout()
         home()  # Redirect to Home page after logout
     else:
-        st.sidebar.warning("Silakan login terlebih dahulu untuk mengakses halaman ini.")     
+        st.sidebar.warning("Silakan login terlebih dahulu untuk mengakses halaman ini.")
+        
 if __name__ == '__main__':
     main()
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">', unsafe_allow_html=True)
