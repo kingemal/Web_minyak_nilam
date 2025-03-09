@@ -556,7 +556,7 @@ def main():
     st.sidebar.title("Navigasi")
     
     # Periksa query params ketika aplikasi dijalankan
-    query_params = st.get_query_params.to_dict()
+    query_params = st.query_params.to_dict()
     Id_Penyulingan = query_params.get('Id_Penyulingan',[None][0])
 
     # Jika Id_Produksi diberikan di URL, langsung ke halaman Penelusuran
