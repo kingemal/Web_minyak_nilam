@@ -205,7 +205,7 @@ def pengepul_2():
         st.success("Pelacakan berhasil ditambahkan.")
 
 # Fungsi Halaman Membuat Detail Qr code Produk Minyak Nilam
-def Minyaknilam():
+def minyaknilam():
     st.title("Detail Qrcode Minyak Nilam")
     Id_Penyulingan_list = get_ids_from_db ("SELECT Id_Penyulingan FROM Table_Penyulingan")
     Id_Minyak_Nilam_list = get_ids_from_db ("SELECT Id_Penyulingan FROM Table_Penyulingan")
@@ -217,7 +217,7 @@ def Minyaknilam():
     Nama_Pengepul_12 = st.text_input("Masukkan Nama Pengepul 1/2")
     Tanggal_Penjualan_ke_Pengepul_12 = st.date_input("Tanggal_Penjualan_ke_Pengepul_1/2")
     if st.button("Tambah detail Qrcode"):
-        add_Minyaknilam(Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,)
+        add_minyaknilam(Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,)
         st.success("Pelacakan berhasil ditambahkan.")
 
 # Fungsi untuk menambahkan Pengepul_1 ke database
@@ -243,7 +243,7 @@ def add_pengepul_2(Id_Petani, Id_Pengepul_1, Id_Pengepul_2, Id_Penyulingan, Jeni
         st.error(f"Kesalahan database: {e}")
 
 # Fungsi untuk menambahkan Pengepul_1 ke database
-def add_Minyaknilam(Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,):
+def add_minyaknilam(Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,):
     try:
         with sqlite3.connect('data_nilam.db') as conn:
             cursor = conn.cursor()
@@ -492,12 +492,14 @@ def signup():
         conn = sqlite3.connect('data_nilam.db')
         c = conn.cursor()
         
-        if role == "Administrasi":
-            table_name = 'admin_users'
-        elif role == "Retailer":
-            table_name = 'retailer_users'
-        elif role == "Distribusi":
-            table_name = 'distribusi_users'
+        if role == "Petani":
+            table_name = 'petani_users'
+        elif role == "Penyulingan":
+            table_name = 'penyulingan_users'
+        elif role == "Pengepul 1":
+            table_name = 'pengepul1_users'
+        elif role == "Pengepul 2":
+            table_name = 'pengepul2_users'
         
         c.execute(f'INSERT INTO {table_name} (username, email, password) VALUES (?, ?, ?)', (username, email, password))
         conn.commit()
@@ -515,7 +517,7 @@ def login():
     st.write("Login Page")
     email = st.text_input("Email")
     password = st.text_input("Password", type="password")
-    role = st.selectbox("Login as", ["Petani", "Penyuling", "Pengepul 1", "Pengepul 2"])
+    role = st.selectbox("Login as", ["Petani", "Penyulingan", "Pengepul 1", "Pengepul 2"])
     
     if st.button("Login"):
         conn = sqlite3.connect('data_nilam.db')
@@ -523,8 +525,8 @@ def login():
         
         if role == "Petani":
             table_name = 'petani_users'
-        elif role == "Penyuling":
-            table_name = 'penyuling_users'
+        elif role == "Penyulingan":
+            table_name = 'penyulingan_users'
         elif role == "Pengepul 1":
             table_name = 'pengepul1_users'
         elif role == "Pengepul 2":
@@ -537,13 +539,12 @@ def login():
         conn.close()
         
         if user:
-            st.session_state.loggin = True
+            st.session_state.logged_in = True
             st.session_state.role = role.lower()  # store role in lowercase to match with menu conditions
-            st.rerun() # Refresh the page to show the correct menu  
+            st.rerun() #  Refresh the page to show the correct menu
         else:
             st.error("Invalid credentials")
-
-
+    
 def main():
     # Initialize session state if not already set
     if 'logged_in' not in st.session_state:
@@ -553,7 +554,7 @@ def main():
     st.sidebar.title("Navigasi")
     
     # Periksa query params ketika aplikasi dijalankan
-    query_params = st.query_params.to_dict()
+    query_params= st.query_params.to_dict()
     Id_Penyulingan = query_params.get('Id_Penyulingan',[None][0])
 
     # Jika Id_Produksi diberikan di URL, langsung ke halaman Penelusuran
@@ -564,12 +565,12 @@ def main():
     if st.session_state.logged_in:
         if st.session_state.role == "Petani":
             menu = ["Home", "Petani", "Log Out"]
-        elif st.session_state.role == "penyuling":
+        elif st.session_state.role  == "Penyulingan":
             menu = ["Home", "Penyulingan", "Log Out"]
-        elif st.session_state.role == "Pengepul1_users":
+        elif st.session_state.role  == "Pengepul 1":
             menu = ["Home", "Pengepul 1", "Log Out"]
-        elif st.session_state.role == "Pengepul 2":
-            menu = ["Home", "Penelusuran", "Generate QR code", "Petani", "Penyuling", "Pengepul 1", "Pengepul 2", "Minyak Nilam", "SignUp", "Log Out"]
+        elif st.session_state.role  == "Pengepul 2":
+            menu = ["Home", "Penelusuran", "Generate QR code", "Petani", "Penyulingan", "Pengepul 1", "Pengepul 2", "Minyak Nilam", "SignUp", "Log Out"]
     else:
         menu = ["Home", "Login"]
 
@@ -589,12 +590,12 @@ def main():
         petani()
     elif choice == "Penyulingan" and st.session_state.logged_in:
         penyuling()
-    elif choice == "Pengepul_1" and st.session_state.logged_in:
+    elif choice == "Pengepul 1" and st.session_state.logged_in:
         pengepul_1()
-    elif choice == "Pengepul_2" and st.session_state.logged_in:
+    elif choice == "Pengepul 2" and st.session_state.logged_in:
         pengepul_2()
     elif choice == "Minyak nilam" and st.session_state.logged_in:
-        Minyaknilam()
+        minyaknilam()
     elif choice == "Log Out" and st.session_state.logged_in:
         logout()
         home()  # Redirect to Home page after logout
