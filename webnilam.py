@@ -522,13 +522,13 @@ def login():
         c = conn.cursor()
         
         if role == "Petani":
-            table_name = 'Petani_users'
+            table_name = 'petani_users'
         elif role == "Penyuling":
-            table_name = 'Penyuling_users'
+            table_name = 'penyuling_users'
         elif role == "Pengepul 1":
-            table_name = 'Pengepul1_users'
+            table_name = 'pengepul1_users'
         elif role == "Pengepul 2":
-            table_name = 'Pengepul2_users'
+            table_name = 'pengepul2_users'
         
         # Assuming hashed_password is directly used; in a real application, it should be hashed
         hashed_password = password
