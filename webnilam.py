@@ -539,7 +539,7 @@ def login():
         if user:
             st.session_state.loggin = True
             st.session_state.role = role.lower()  # store role in lowercase to match with menu conditions
-            params = st.get_query_params.to_dict()
+            params = st.query_params.to_dict()
             page = params.get("page", ["home"])[0] # Refresh the page to show the correct menu
         if page == "home":
             st.write("Home")
