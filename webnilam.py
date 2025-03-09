@@ -539,7 +539,7 @@ def login():
         if user:
             st.session_state.loggin = True
             st.session_state.role = role.lower()  # store role in lowercase to match with menu conditions
-            params = st.experimental_get_query_params()
+            st.experimental_get_query_params()
             page = params.get("page", ["home"])[0] # Refresh the page to show the correct menu
         else:
             st.error("Invalid credentials")
@@ -552,9 +552,6 @@ def main():
         st.session_state.role = ""
 
     st.sidebar.title("Navigasi")
-
-    params = st.experimental_get_query_params()
-    page = params.get("page", ["home"])[0]
     
     # Periksa query params ketika aplikasi dijalankan
     query_params = st.experimental_get_query_params()
