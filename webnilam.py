@@ -541,6 +541,8 @@ def login():
             st.session_state.role = role.lower()  # store role in lowercase to match with menu conditions
             params = st.get_query_params()
             page = params.get("page", ["home"])[0] # Refresh the page to show the correct menu
+        if page == "home":
+            st.write("Home")
         else:
             st.error("Invalid credentials")
 
