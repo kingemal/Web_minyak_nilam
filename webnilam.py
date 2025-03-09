@@ -539,7 +539,7 @@ def login():
         if user:
             st.session_state.loggin = True
             st.session_state.role = role.lower()  # store role in lowercase to match with menu conditions
-            st.query_params.clear() # Refresh the page to show the correct menu  
+            st.rerun() # Refresh the page to show the correct menu  
         else:
             st.error("Invalid credentials")
 
