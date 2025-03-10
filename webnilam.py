@@ -403,7 +403,7 @@ def penelusuran(Id_Penyulingan=None):
         product_info = get_product_info(Id_Penyulingan) 
 
         if product_info:
-            st.write(f"**Tanggal Penyulingan:** {product_info[8]}")
+            st.write(f"**Tanggal Penyulingan:** {product_info[7]}")
             
             # Menampilkan detail produk dari Id_Minyak_Nilam
             id_minyak_nilam_to_view = product_info[1]
@@ -415,7 +415,7 @@ def penelusuran(Id_Penyulingan=None):
                     st.write(f"**Jumlah_Minyak:** {product_info_detail[3]}")
                     st.write(f"*Lokasi:** {product_info_detail[5]}")
                     st.write(f"**Nama Pengepul 1 atau 2:** {product_info_detail[6]}")
-                    st.write(f"*Tanggal Penjualan ke pengepul 1 atau 2:** {product_info_detail[7]}")
+                    st.write(f"*Tanggal Penjualan ke pengepul 1 atau 2:** {product_info_detail[8]}")
 
                     # Menampilkan gambar jika ada
                     if product_info_detail[4]:
