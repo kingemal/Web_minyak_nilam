@@ -294,7 +294,7 @@ def columns_for_table(table_name):
     }
     return columns_dict.get(table_name, ["Id"])
 
-# Fungsi untuk mengambil data penyulingan berdasarkan Id penyuling
+# Fungsi untuk mengambil data penyulingan berdasarkan Id_Penyuling
 def get_product_info(Id_Penyulingan):
     conn = sqlite3.connect('data_nilam.db')
     cursor = conn.cursor()
@@ -305,12 +305,12 @@ def get_product_info(Id_Penyulingan):
     conn.close()
     return data
 
-# Fungsi untuk mengambil data produk berdasarkan Id_Produk
-def get_product_from_db(Id_Penyulingan):
-    conn = sqlite3.connect('data_nilam')
+# Fungsi untuk mengambil data minyak nilam berdasarkan Id_Minyak_Nilam
+def get_product_from_db(Id_Minyak_Nilam):
+    conn = sqlite3.connect('data_nilam.db')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM Table_Penyulingan WHERE Id_Penyulingan=?", (Id_Penyulingan,))
+    cursor.execute("SELECT * FROM Table_Minyak_Nilam WHERE Id_Minyak_Nilam=?", (Id_Minyak_Nilam,))
     data = cursor.fetchone()
 
     conn.close()
