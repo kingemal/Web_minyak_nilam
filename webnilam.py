@@ -306,11 +306,11 @@ def get_product_info(Id_Penyulingan):
     return data
 
 # Fungsi untuk mengambil data produk berdasarkan Id_Produk
-def get_product_from_db(Id_Minyak_Nilam):
+def get_product_from_db(Id_Penyulingan):
     conn = sqlite3.connect('data_nilam')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM Table_Minyak_Nilam WHERE Id_Minyak_Nilamn=?", (Id_Minyak_Nilam,))
+    cursor.execute("SELECT * FROM Table_Penyulingan WHERE Id_Penyulingan=?", (Id_Penyulingan,))
     data = cursor.fetchone()
 
     conn.close()
@@ -555,25 +555,25 @@ def main():
     
     # Periksa query params ketika aplikasi dijalankan
     query_params= st.query_params.to_dict()
-    Id_Penyulingan = query_params.get('Id_Penyulingan',[None][0])
+    Id_Penyulingan = query_params.get('Id_Penyulingan', [None][0])
 
     # Jika Id_Produksi diberikan di URL, langsung ke halaman Penelusuran
     if  Id_Penyulingan:
-        penelusuran(Id_Penyulingan)
-        return  # Exit the main function to prevent further processing
+         penelusuran(Id_Penyulingan)
+         return  # Exit the main function to prevent further processing
     
     if st.session_state.logged_in:
-        if st.session_state.role == "Petani":
+        if st.session_state.role == "petani":
             menu = ["Home", "Petani", "Log Out"]
-        elif st.session_state.role  == "Penyulingan":
+        elif st.session_state.role  == "penyulingan":
             menu = ["Home", "Penyulingan", "Log Out"]
-        elif st.session_state.role  == "Pengepul 1":
+        elif st.session_state.role  == "pengepul 1":
             menu = ["Home", "Pengepul 1", "Log Out"]
-        elif st.session_state.role  == "Pengepul 2":
-            menu = ["Home", "Penelusuran", "Generate QR code", "Petani", "Penyulingan", "Pengepul 1", "Pengepul 2", "Minyak Nilam", "SignUp", "Log Out"]
+        elif st.session_state.role  == "pengepul 2":
+            menu = ["Home", "Penelusuran", "Petani", "Generate QR code", "Penyulingan", "Pengepul 1", "Pengepul 2", "Minyak Nilam", "SignUp", "Log Out"]
     else:
         menu = ["Home", "Login"]
-
+    
     choice = st.sidebar.selectbox("Navigasi", menu)
 
     if choice == "Home":
@@ -594,7 +594,7 @@ def main():
         pengepul_1()
     elif choice == "Pengepul 2" and st.session_state.logged_in:
         pengepul_2()
-    elif choice == "Minyak nilam" and st.session_state.logged_in:
+    elif choice == "Minyak Nilam" and st.session_state.logged_in:
         minyaknilam()
     elif choice == "Log Out" and st.session_state.logged_in:
         logout()
@@ -604,7 +604,7 @@ def main():
         
 if __name__ == '__main__':
     main()
-st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">', unsafe_allow_html=True)
+    st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">', unsafe_allow_html=True)
 
 
 
