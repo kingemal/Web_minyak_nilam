@@ -305,7 +305,7 @@ def get_product_info(Id_Penyulingan):
     conn.close()
     return data
 
-# Fungsi untuk mengambil data minyak nilam berdasarkan Id_Minyak_Nilam
+# Fungsi untuk mengambil data Minyak Nilam berdasarkan Id_Minyak_Nilam
 def get_product_from_db(Id_Minyak_Nilam):
     conn = sqlite3.connect('data_nilam.db')
     cursor = conn.cursor()
@@ -401,8 +401,9 @@ def penelusuran(Id_Penyulingan=None):
     conn.close()
     if Id_Penyulingan:
         product_info = get_product_info(Id_Penyulingan) 
+
         if product_info:
-            st.write(f"**Tanggal Penyulingan:** {product_info[7]}")
+            st.write(f"**Tanggal Penyulingan:** {product_info[8]}")
             
             # Menampilkan detail produk dari Id_Minyak_Nilam
             id_minyak_nilam_to_view = product_info[1]
@@ -412,13 +413,13 @@ def penelusuran(Id_Penyulingan=None):
                     st.write(f"**Nama Petani atau Penyuling:** {product_info_detail[1]}")
                     st.write(f"**Jenis Penyulingan:** {product_info_detail[2]}")
                     st.write(f"**Jumlah_Minyak:** {product_info_detail[3]}")
-                    st.write(f"**Jumlah Minyak:** {product_info_detail[4]}")
                     st.write(f"*Lokasi:** {product_info_detail[5]}")
                     st.write(f"**Nama Pengepul 1 atau 2:** {product_info_detail[6]}")
+                    st.write(f"*Tanggal Penjualan ke pengepul 1 atau 2:** {product_info_detail[7]}")
 
                     # Menampilkan gambar jika ada
                     if product_info_detail[4]:
-                        image_db = Image.open(io.BytesIO(product_info_detail[8]))
+                        image_db = Image.open(io.BytesIO(product_info_detail[4]))
                         st.image(image_db, caption='Gambar dari Database SQLite', use_column_width=True)
                     else:
                         st.info("Tidak ada gambar untuk produk ini.")
