@@ -475,7 +475,7 @@ def penelusuran(Id_Penyulingan=None):
             # Tampilkan peta di Streamlit
             st.pydeck_chart(peta)
                 # Link ke halaman utama perusahaan
-            st.markdown("[Kunjungi Home Perusahaan](#ISI LINK PERUSAHAAN)")
+            st.markdown("[Kunjungi Home web minyak nilam](#ISI LINK)")
 
         else:
             st.error('Data produksi tidak ditemukan!')
