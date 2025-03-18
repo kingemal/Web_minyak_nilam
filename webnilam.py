@@ -207,7 +207,7 @@ def pengepul_2():
 # Fungsi Halaman Membuat Detail Qr code Produk Minyak Nilam
 def minyaknilam():
     st.title("Detail Qrcode Minyak Nilam")
-    Id_Minyak_Nilam_list = get_ids_from_db ("SELECT Id_Penyulingan FROM Table_Penyulingan")
+    Id_Minyak_Nilam_list = get_ids_from_db ("SELECT Id_Minyak_Nilam FROM Table_Penyulingan")
     Id_Minyak_Nilam = st.selectbox("Id_Minyak_Nilam", Id_Minyak_Nilam_list)
     Nama_Petani_Penyuling = st.text_input("Masukkan Nama Petani atau Penyuling")
     Jenis_Penyulingan = st.text_input("Masukkan Jenis Penyulingan")
