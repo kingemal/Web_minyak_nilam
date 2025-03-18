@@ -372,7 +372,7 @@ def penelusuran(Id_Penyulingan=None):
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Table_Penyulingan (
             Id_Penyulingan TEXT PRIMARY KEY,
-            Id_Minyak_Nilam
+            Id_Minyak_Nilam TEXT PRIMARY KEY,
             Jenis_Penyulingan TEXT,
             Jumlah_Minyak TEXT,
             Kadar_PA TEXT,
@@ -385,13 +385,14 @@ def penelusuran(Id_Penyulingan=None):
     # Membuat tabel produk untuk detail produk
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Table_Minyak_Nilam (
-            Id_Penyulingan TEXT PRIMARY KEY,
-            Nama_Petani_atau_Penyuling, TEXT
+            Id_Minyak_Nilam TEXT PRIMARY KEY,
+            Nama_Petani_atau_Penyuling TEXT,
             Jenis_Penyulingan TEXT,
             Jumlah_Minyak TEXT,
             Lokasi TEXT,
-            Nama_Pengepul_12, TEXT
-            Tanggal_Penjualan_ke_Pengepul, TEXT
+            Tanggal_Penjualan_ke_Pengepul TEXT,
+            Nama_Pengepul_12 TEXT,
+            Tanggal_Penyulingan TEXT,       
             Gambar BLOB  
                     )
     ''')
@@ -417,7 +418,7 @@ def penelusuran(Id_Penyulingan=None):
                     st.write(f"*Tanggal Penjualan ke pengepul 1 atau 2:** {product_info_detail[6]}")
 
                     # Menampilkan gambar jika ada
-                    if product_info_detail[4]:
+                    if product_info_detail[8]:
                         image_db = Image.open(io.BytesIO(product_info_detail[8]))
                         st.image(image_db, caption='Gambar dari Database SQLite', use_column_width=True)
                     else:
