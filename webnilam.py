@@ -114,7 +114,7 @@ def get_ids_from_db(query):
     return [item[0] for item in data]
 
 # Fungsi Halaman Untuk Produksi
-def penyuling():
+def penyulingan():
     st.title("Produksi/Penyulingan Nilam")
     Id_Penyulingan = st.text_input("Id Produksi/Penyulingan")
     Id_Minyak_Nilam = st.text_input("Masukkan Id Minyak Nilam")
