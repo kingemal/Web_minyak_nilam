@@ -379,7 +379,7 @@ def penelusuran(Id_Penyulingan=None):
             Lokasi TEXT,
             Tanggal_Penyulingan TEXT,
             Tanggal_Penjualan TEXT
-                    )
+        )
     ''')
 
     # Membuat tabel produk untuk detail produk
@@ -394,7 +394,7 @@ def penelusuran(Id_Penyulingan=None):
             Nama_Pengepul_12 TEXT,
             Tanggal_Penyulingan TEXT,       
             Gambar BLOB  
-                    )
+        )
     ''')
 
     conn.commit()
