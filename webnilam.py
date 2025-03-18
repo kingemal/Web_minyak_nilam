@@ -128,7 +128,7 @@ def penyuling():
         add_penyulingan(Id_Penyulingan, Id_Minyak_Nilam, Jenis_Penyulingan, Jumlah_minyak, Kadar_PA, Lokasi, Tanggal_Penyulingan, Tanggal_Penjualan)
         st.success("Pelacakan berhasil ditambahkan.")
 
-# Fungsi untuk menambahkan Produksi ke database
+# Fungsi untuk menambahkan penyulingan ke database
 def add_penyulingan(Id_Penyulingan, Id_Minyak_Nilam, Jenis_Penyulingan, Jumlah_Minyak, Kadar_PA, Lokasi, Tanggal_Penyulingan, Tanggal_Penjualan):
     try:
         with sqlite3.connect('data_nilam.db') as conn:
@@ -207,17 +207,16 @@ def pengepul_2():
 # Fungsi Halaman Membuat Detail Qr code Produk Minyak Nilam
 def minyaknilam():
     st.title("Detail Qrcode Minyak Nilam")
-    Id_Penyulingan_list = get_ids_from_db ("SELECT Id_Penyulingan FROM Table_Penyulingan")
     Id_Minyak_Nilam_list = get_ids_from_db ("SELECT Id_Penyulingan FROM Table_Penyulingan")
-    Id_Minyak_Nilam = st.selectbox("Id_Minyak_Nilam",  Id_Minyak_Nilam_list)
-    Id_Penyulingan = st.selectbox("Id_Id_Penyulingan",  Id_Penyulingan_list)
+    Id_Minyak_Nilam = st.selectbox("Id_Minyak_Nilam", Id_Minyak_Nilam_list)
+    Nama_Petani_Penyuling = st.text_input("Masukkan Nama Petani atau Penyuling")
     Jenis_Penyulingan = st.text_input("Masukkan Jenis Penyulingan")
     Jumlah_minyak = st.text_input("Masukkan jumlah Minyak")
     Lokasi = st.text_input("Masukkan Lokasi")
     Nama_Pengepul_12 = st.text_input("Masukkan Nama Pengepul 1/2")
     Tanggal_Penjualan_ke_Pengepul_12 = st.date_input("Tanggal_Penjualan_ke_Pengepul_1/2")
     if st.button("Tambah detail Qrcode"):
-        add_minyaknilam(Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,)
+        add_minyaknilam(Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,)
         st.success("Pelacakan berhasil ditambahkan.")
 
 # Fungsi untuk menambahkan Pengepul_1 ke database
@@ -242,13 +241,13 @@ def add_pengepul_2(Id_Petani, Id_Pengepul_1, Id_Pengepul_2, Id_Penyulingan, Jeni
     except sqlite3.Error as e:
         st.error(f"Kesalahan database: {e}")
 
-# Fungsi untuk menambahkan Pengepul_1 ke database
-def add_minyaknilam(Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,):
+# Fungsi untuk menambahkan detail minyak nilam ke database
+def add_minyaknilam(Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,):
     try:
         with sqlite3.connect('data_nilam.db') as conn:
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO Table_Minyak_Nilam (Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-                           (Id_Minyak_Nilam, Id_Penyulingan, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,))
+            cursor.execute('INSERT INTO Table_Minyak_Nilam (Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+                           (Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12,))
     except sqlite3.Error as e:
         st.error(f"Kesalahan database: {e}")
 
