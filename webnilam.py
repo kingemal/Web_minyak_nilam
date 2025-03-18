@@ -394,7 +394,7 @@ def penelusuran(Id_Penyulingan=None):
             Nama_Pengepul_12 TEXT,
             Tanggal_Penyulingan TEXT,       
             Gambar BLOB  
-                    )
+                        )
     ''')
 
     conn.commit()
