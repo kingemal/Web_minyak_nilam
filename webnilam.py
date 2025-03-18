@@ -515,7 +515,7 @@ def logout():
     st.session_state.page = "Home"  # Set halaman tujuan setelah logout
 
 def login():
-    st.write("Login Page")
+    st.title("Login Page")
     email = st.text_input("Email")
     password = st.text_input("Password", type="password")
     role = st.selectbox("Login as", ["Petani", "Penyulingan", "Pengepul 1", "Pengepul 2"])
