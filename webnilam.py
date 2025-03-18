@@ -378,7 +378,7 @@ def penelusuran(Id_Penyulingan=None):
             Kadar_PA TEXT,
             Lokasi TEXT,
             Tanggal_Penyulingan TEXT,
-            Tanggal_Penjualan TEXT
+            Tanggal_Penjualan TEXT,
                         )
     ''')
 
@@ -393,8 +393,8 @@ def penelusuran(Id_Penyulingan=None):
             Tanggal_Penjualan_ke_Pengepul TEXT,
             Nama_Pengepul_12 TEXT,
             Tanggal_Penyulingan TEXT,       
-            Gambar BLOB  
-                        )
+            Gambar BLOB,  
+                    )
     ''')
 
     conn.commit()
