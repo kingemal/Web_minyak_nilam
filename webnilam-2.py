@@ -409,7 +409,7 @@ def penelusuran(Id_Penyulingan=None):
             if id_minyak_nilam_to_view:
                 product_info_detail = get_product_from_db(id_minyak_nilam_to_view)
                 if product_info_detail:
-                    st.write(f"<h3>**Nama Petani atau Penyuling:<h3>** {product_info_detail[1]}")
+                    st.write(f"<h3>Nama Petani atau Penyuling:<h3> {product_info_detail[1]}")
                     st.write(f"**Jenis Penyulingan:** {product_info_detail[2]}")
                     st.write(f"**Jumlah_Minyak:** {product_info_detail[3]}")
                     st.write(f"**Lokasi:** {product_info_detail[4]}")
