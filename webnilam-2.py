@@ -431,7 +431,7 @@ def penelusuran(Id_Penyulingan=None):
             st.header("Alamat Petani Nilam Aceh")
 
             # Koordinat lokasi Pemasok
-            lokasi = [5.5598861, 95.31965]  # Lokasi aceh jaya
+            lokasi = [3.323170, 97.176502]  # Lokasi aceh jaya
 
             # Kunci API Mapbox (Ganti dengan kunci API Anda sendiri)
             pdk.settings.api_key = "YOUR_MAPBOX_API_KEY"
