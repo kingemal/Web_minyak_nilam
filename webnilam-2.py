@@ -51,7 +51,7 @@ def home():
                 </div>
                 <div style="margin: 10px;">
                     <i class="fa fa-phone" style="font-size: 24px;"></i>
-                    <p>(tambah)</p>
+                    <p>082256778990</p>
                 </div>
             </div>
             <p><strong></strong> </p>
