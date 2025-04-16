@@ -54,7 +54,7 @@ def home():
                     <p>(tambah)</p>
                 </div>
             </div>
-            <p><strong>:</strong> </p>
+            <p><strong></strong> </p>
         </div>
     """, unsafe_allow_html=True)
 
