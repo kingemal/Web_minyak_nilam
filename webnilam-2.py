@@ -486,7 +486,7 @@ def signup():
     username = st.text_input("New Username")
     email = st.text_input("Email")
     password = st.text_input("New Password", type="password")
-    role = st.selectbox("Role", ["Administrasi", "Retailer", "Distribusi"])
+    role = st.selectbox("Role", ["Administrasi", "Petani", "Penyulingan", "Pengepul 1", "Pengepul 2"])
     
     if st.button("Sign Up"):
         conn = sqlite3.connect('data_nilam.db')
