@@ -34,7 +34,7 @@ def home():
                 <div style="margin: 10px;">
                     <a href="ISI LINK IG" target="_blank" style="text-decoration: none; color: inherit;">
                         <i class="fa fa-instagram" style="font-size: 24px;"></i>
-                        <p>@Nilam Aceh</p>
+                        <p>Nilam Aceh</p>
                     </a>
                 </div>
                 <div style="margin: 10px;">
