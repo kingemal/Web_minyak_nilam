@@ -465,7 +465,7 @@ def penelusuran(Id_Penyulingan=None):
                 initial_view_state=pdk.ViewState(
                     latitude=lokasi[0],
                     longitude=lokasi[1],
-                    zoom=17,  # Zoom sesuai dengan link Google Maps
+                    zoom=10,  # Zoom sesuai dengan link Google Maps
                     pitch=0,
                 ),
                 map_style="mapbox://styles/mapbox/outdoors-v12"  # Gaya peta global
