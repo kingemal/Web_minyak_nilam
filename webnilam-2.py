@@ -17,9 +17,7 @@ def home():
     
  # Contoh gambar dari Google
     st.image("Gambar produk/gambar produk minyak nilam.png", use_column_width=True)
-        try: with open("Gambar produk/gambar produk minyak nilam.png", "wb") as f:
-          
-
+       
 # Deskripsi perusahaan
     st.markdown("""
         <div style="text-align: center;">
