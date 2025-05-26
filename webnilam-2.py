@@ -15,15 +15,10 @@ import segno
 def home():
     st.title("Selamat Datang di Management System Nilam")
     
-# Menambahkan file uploader
-uploaded_file = st.file_uploader("Unggah foto", type=["jpg", "jpeg", "png"])
+ # Contoh gambar dari Google
+      st.image("https://media.istockphoto.com/id/1168224419/id/foto/hidup-semarak-hijau-pogostemon-cablin-patchouli-tanaman-daun-basah-dari-hujan.jpg?s=2048x2048&w=is&k=20&c=nwRSXMai7sXjumRmCiFb0ckTsIpx5sFFiLNnf29PHJo=", use_column_width=True)
 
-# Menampilkan gambar jika sudah diunggah
-if uploaded_file is not None:
-    image = Image.open(uploaded_file)
-    st.image(image, use_column_width=True)
-
-    # Deskripsi perusahaan
+# Deskripsi perusahaan
     st.markdown("""
         <div style="text-align: center;">
             <p>Nilam merupakan tumbuhan penghasil minyak atsiri yang digunakan sebagai bahan tambahan dalam pembuatan industri seperti parfum, kosmetik, sabun dan lainnya.</p>
