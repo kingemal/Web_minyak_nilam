@@ -16,7 +16,7 @@ def home():
     st.title("Selamat Datang di Management System Nilam")
     
  # Contoh gambar dari Google
-      st.image("", use_column_width=True)
+      st.image("gambar produk minyak nilam.png", use_column_width=True)
 
 # Deskripsi perusahaan
     st.markdown("""
