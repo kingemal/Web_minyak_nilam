@@ -16,7 +16,7 @@ def home():
     st.title("Selamat Datang di Management System Nilam")
     
  # Contoh gambar dari Google
-      st.image("Gambar produk/gambar produk minyak nilam.png", use_column_width=True)
+    st.image("Gambar produk/gambar produk minyak nilam.png", use_column_width=True)
 with open("Gambar produk/gambar produk minyak nilam.png", "wb") as f:
     f.write(uploaded_file.getbuffer())
 
