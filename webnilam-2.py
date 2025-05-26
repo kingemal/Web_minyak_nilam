@@ -17,9 +17,9 @@ def home():
     
  # Contoh gambar dari Google
     st.image("Gambar produk/gambar produk minyak nilam.png", use_column_width=True)
-    try:
-        with open("Gambar produk/gambar produk minyak nilam.png", "wb") as f:
-        f.write(uploaded_file.getbuffer())
+        try:
+            with open("Gambar produk/gambar produk minyak nilam.png", "wb") as f:
+            f.write(uploaded_file.getbuffer())
 
 # Deskripsi perusahaan
     st.markdown("""
