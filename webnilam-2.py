@@ -347,7 +347,7 @@ def generate():
                 qr_image.save(qr_file_path)
 
                 # Menampilkan QR code di Streamlit
-                st.image(qr_file_path, caption=" Hasil Qr Code Untuk Id Penyulingan", use_column_width=False)
+                st.image(qr_file_path, caption=" Hasil Qr Code Untuk Id Penyulingan", use_container_width=False)
                 
                 # Menampilkan informasi terkait (gabungan Id Produksi dan link)
                 st.write(f"{link}Id_Penyulingan={Id_Penyulingan}")
