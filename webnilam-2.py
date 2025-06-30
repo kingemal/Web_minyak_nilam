@@ -477,9 +477,9 @@ def penelusuran(Id_Penyulingan=None):
             st.markdown("[Kunjungi Home web minyak nilam](https://webminyaknilam.streamlit.app)")
 
         else:
-            st.error('Data produksi tidak ditemukan!')
+            st.error('Data produk tidak ditemukan!')
     else:
-        st.error('ID Produksi tidak ditemukan.')
+        st.error('Id Penyulingan tidak ditemukan.')
 
 def signup():
     st.write("Sign Up Page")
