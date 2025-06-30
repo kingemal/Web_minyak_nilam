@@ -419,7 +419,7 @@ def penelusuran(Id_Penyulingan=None):
                     # Menampilkan gambar jika ada
                     if product_info_detail[8]:
                         image_db = Image.open(io.BytesIO(product_info_detail[8]))
-                        st.image(image_db, caption='Gambar dari Database SQLite', use_column_width=True)
+                        st.image(image_db, caption='Gambar dari Database SQLite', use_container_width=True)
                     else:
                         st.info("Tidak ada gambar untuk produk ini.")
                 else:
