@@ -431,7 +431,7 @@ def penelusuran(Id_Penyulingan=None):
             st.header("Alamat Petani Nilam Aceh")
 
             # Koordinat lokasi Petani Nilam
-            lokasi = [4.548542, 95.719557]  # Lokasi aceh besar
+            lokasi = [5.241450247102548, 95.27111284452734]  # Lokasi aceh besar
 
             # Kunci API Mapbox (Ganti dengan kunci API Anda sendiri)
             pdk.settings.api_key = "YOUR_MAPBOX_API_KEY"
@@ -439,7 +439,7 @@ def penelusuran(Id_Penyulingan=None):
             # Buat layer peta untuk lokasi pasar dengan marker besar
             marker_layer = pdk.Layer(
                 "ScatterplotLayer",
-                data=[{"position": lokasi, "name": "Aceh Besa"}],
+                data=[{"position": lokasi, "name": "Aceh Besar"}],
                 get_position="position",
                 get_fill_color=[255, 0, 0],  # Merah untuk marker
                 get_radius=10000,  # Radius besar untuk visibilitas
