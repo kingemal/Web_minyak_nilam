@@ -337,7 +337,7 @@ def generate():
                 # Generate QR code data
                 link = "https://webminyaknilam.streamlit.app//?"
                 data = f"{link}Id_Penyulingan={Id_Penyulingan}"
-                qr_image = segno.make(data, box_size=20 border=4)
+                qr_image = segno.make(data)
 
                 # Menyimpan gambar QR code sementara
                 if not os.path.exists(generated_qrcodes_path):
