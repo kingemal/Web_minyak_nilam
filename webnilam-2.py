@@ -434,7 +434,7 @@ def penelusuran(Id_Penyulingan=None):
             lokasi = [5.241450247102548, 95.27111284452734]  # Lokasi aceh besar
 
             # Kunci API Mapbox (Ganti dengan kunci API Anda sendiri)
-            pdk.settings.api_key = "YOUR_MAPBOX_API_KEY"
+            pdk.settings.api_key = "pk.eyJ1IjoiZGVtbyIsImEiOiJja3Y4dzFpc24wMzN1MnBvMnBpbXFhdzAxIn0.jHFk4bA0McmkR2hQXScqVg"
 
             # Buat layer peta untuk lokasi pasar dengan marker besar
             marker_layer = pdk.Layer(
