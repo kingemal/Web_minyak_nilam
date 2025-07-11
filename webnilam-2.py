@@ -431,7 +431,7 @@ def penelusuran(Id_Penyulingan=None):
             st.header("Alamat Petani Nilam Aceh")
             
             data = {'latitude': [5.241024],
-                    'longitude': [95.270835}
+                    'longitude': [95.270835]}
 
             # Membuat DataFrame
             df = pd.DataFrame(data)
