@@ -430,8 +430,8 @@ def penelusuran(Id_Penyulingan=None):
              # Menampilkan peta lokasi petani
             st.header("Alamat Petani Nilam Aceh")
             
-            data = {'latitude': [5.241024, 5.325016],
-                    'longitude': [95.270835, 95.237403]}
+            data = {'latitude': [5.241024],
+                    'longitude': [95.270835}
 
             # Membuat DataFrame
             df = pd.DataFrame(data)
