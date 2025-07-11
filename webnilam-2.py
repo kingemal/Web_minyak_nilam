@@ -429,50 +429,16 @@ def penelusuran(Id_Penyulingan=None):
             
              # Menampilkan peta lokasi petani
             st.header("Alamat Petani Nilam Aceh")
+            
+            data = {'latitude': [5.241024, 5.325016],
+                    'longitude': [95.270835, 95.237403]}
 
-            # Koordinat lokasi Petani Nilam
-            lokasi = [5.2413647753048505, 95.27102701384658]  # Lokasi aceh besar
+            # Membuat DataFrame
+            df = pd.DataFrame(data)
 
-            # Kunci API Mapbox (Ganti dengan kunci API Anda sendiri)
-            pdk.settings.api_key = "pk.eyJ1IjoiZGVtbyIsImEiOiJja3Y4dzFpc24wMzN1MnBvMnBpbXFhdzAxIn0.jHFk4bA0McmkR2hQXScqVg"
-
-            # Buat layer peta untuk lokasi pasar dengan marker besar
-            marker_layer = pdk.Layer(
-                "ScatterplotLayer",
-                data=[{"position": lokasi, "name": "Aceh Besar"}],
-                get_position="position",
-                get_fill_color=[255, 0, 0],  # Merah untuk marker
-                get_radius=10000,  # Radius besar untuk visibilitas
-                pickable=True,
-                auto_highlight=True
-            )
-
-            # Buat layer teks untuk label
-            text_layer = pdk.Layer(
-                "TextLayer",
-                data=[{"position": lokasi, "name": "Aceh Besar"}],
-                get_position="position",
-                get_text="name",
-                get_size=16,
-                get_color=[0, 0, 0],  # Warna teks hitam
-                get_text_anchor="middle",
-                get_alignment_baseline="center",
-            )
-
-            # Set peta dan tampilan dengan gaya peta dari Mapbox
-            peta = pdk.Deck(
-                layers=[marker_layer, text_layer],
-                initial_view_state=pdk.ViewState(
-                    latitude=lokasi[0],
-                    longitude=lokasi[1],
-                    zoom=10,  # Zoom sesuai dengan link Google Maps
-                    pitch=0,
-                ),
-                map_style="mapbox://styles/mapbox/outdoors-v12"  # Gaya peta global
-            )
-
-            # Tampilkan peta di Streamlit
-            st.pydeck_chart(peta)
+            # Menampilkan DataFrame
+            print(df)
+            st.map(df)
                 # Link ke halaman utama perusahaan
             st.markdown("[Kunjungi Home web minyak nilam](https://webminyaknilam.streamlit.app)")
 
