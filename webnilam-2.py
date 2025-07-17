@@ -416,10 +416,10 @@ def penelusuran(Id_Penyulingan=None):
                     st.subheader(f"**Kadar PA:** {product_info_detail[4]}")
                     st.subheader(f"**Lokasi:** {product_info_detail[5]}")
                     st.subheader(f"**Tanggal Penjualan ke pengepul 1 atau 2:** {product_info_detail[6]}")
-                    st.subheader(f"**Nama Pengepul 1 atau 2:** {product_info_detail[9]}")
+                    st.subheader(f"**Nama Pengepul 1 atau 2:** {product_info_detail[8]}")
 
                     # Menampilkan gambar jika ada
-                    if product_info_detail[8]:
+                    if product_info_detail[9]:
                         image_db = Image.open(io.BytesIO(product_info_detail[8]))
                         st.image(image_db, caption='Gambar dari Database SQLite', use_container_width=True)
                     else:
