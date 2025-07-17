@@ -390,6 +390,7 @@ def penelusuran(Id_Penyulingan=None):
             Nama_Petani_atau_Penyuling TEXT,
             Jenis_Penyulingan TEXT,
             Jumlah_Minyak TEXT,
+            Kadar_PA TEXT,
             Lokasi TEXT,
             Nama_Pengepul_12 TEXT,
             Tanggal_Penjualan_ke_Pengepul TEXT,
