@@ -402,7 +402,7 @@ def penelusuran(Id_Penyulingan=None):
         product_info = get_product_info(Id_Penyulingan) 
 
         if product_info:
-            st.write(f"**Tanggal Penyulingan:** {product_info[7]}")
+            st.subheader(f"**Tanggal Penyulingan:** {product_info[7]}")
             
             # Menampilkan detail produk dari Id_Minyak_Nilam
             id_minyak_nilam_to_view = product_info[1]
