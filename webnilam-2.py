@@ -217,7 +217,7 @@ def minyaknilam():
     Nama_Pengepul_12 = st.text_input("Masukkan Nama Pengepul 1/2")
     Tanggal_Penjualan_ke_Pengepul_12 = st.date_input("Tanggal_Penjualan_ke_Pengepul_1/2")
     if st.button("Tambah detail Qrcode"):
-        add_minyaknilam(Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Kadar PA, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12)
+        add_minyaknilam(Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Kadar_PA, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12)
         st.success("Pelacakan berhasil ditambahkan.")
 
 # Fungsi untuk menambahkan Pengepul_1 ke database
@@ -243,12 +243,12 @@ def add_pengepul_2(Id_Petani, Id_Pengepul_1, Id_Pengepul_2, Id_Penyulingan, Jeni
         st.error(f"Kesalahan database: {e}")
 
 # Fungsi untuk menambahkan detail minyak nilam ke database
-def add_minyaknilam(Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Kadar PA, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12):
+def add_minyaknilam(Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Kadar_PA, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12):
     try:
         with sqlite3.connect('data_nilam.db') as conn:
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO Table_Minyak_Nilam (Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Kadar PA, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
-                           (Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Kadar PA, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12))
+            cursor.execute('INSERT INTO Table_Minyak_Nilam (Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Kadar_PA, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+                           (Id_Minyak_Nilam, Nama_Petani_Penyuling, Jenis_Penyulingan, Jumlah_minyak, Kadar_PA, Lokasi, Nama_Pengepul_12, Tanggal_Penjualan_ke_Pengepul_12))
     except sqlite3.Error as e:
         st.error(f"Kesalahan database: {e}")
 
