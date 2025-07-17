@@ -212,7 +212,7 @@ def minyaknilam():
     Nama_Petani_Penyuling = st.text_input("Masukkan Nama Petani atau Penyuling")
     Jenis_Penyulingan = st.text_input("Masukkan Jenis Penyulingan")
     Jumlah_minyak = st.text_input("Masukkan jumlah Minyak")
-    Kadar PA = st.text_input("Masukkan Kadar PA minyak")
+    Kadar_PA = st.text_input("Masukkan Kadar PA minyak")
     Lokasi = st.text_input("Masukkan Lokasi")
     Nama_Pengepul_12 = st.text_input("Masukkan Nama Pengepul 1/2")
     Tanggal_Penjualan_ke_Pengepul_12 = st.date_input("Tanggal_Penjualan_ke_Pengepul_1/2")
