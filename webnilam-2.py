@@ -393,7 +393,8 @@ def penelusuran(Id_Penyulingan=None):
             Lokasi TEXT,
             Nama_Pengepul_12 TEXT,
             Tanggal_Penjualan_ke_Pengepul TEXT,
-            Gambar BLOB
+            Gambar BLOB,
+            Kadar_PA TEXT
                              )
     ''')
 
