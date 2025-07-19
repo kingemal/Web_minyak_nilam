@@ -380,6 +380,7 @@ def penelusuran(Id_Penyulingan=None):
             Lokasi TEXT,
             Tanggal_Penyulingan TEXT,
             Tanggal_Penjualan TEXT
+            Pengepul TEXT
                             )
     ''')
 
