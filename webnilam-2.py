@@ -405,7 +405,7 @@ def penelusuran(Id_Penyulingan=None):
         product_info = get_product_info(Id_Penyulingan) 
 
         if product_info:
-            st.subheader(f"**Tanggal Penyulingan:** {product_info[4]}")
+            st.subheader(f"**Tanggal Penyulingan:** {product_info[9]}")
             
             # Menampilkan detail produk dari Id_Minyak_Nilam
             id_minyak_nilam_to_view = product_info[1]
@@ -414,15 +414,15 @@ def penelusuran(Id_Penyulingan=None):
                 if product_info_detail:
                     st.subheader(f"****Nama Petani atau Penyuling:**** {product_info_detail[1]}")
                     st.subheader(f"**Jenis Penyulingan:** {product_info_detail[2]}")
-                    st.subheader(f"**Jumlah Minyak:** {product_info_detail[7]}")
-                    st.subheader(f"**Kadar PA:** {product_info_detail[9]}")
+                    st.subheader(f"**Jumlah Minyak:** {product_info_detail[6]}")
+                    st.subheader(f"**Kadar PA:** {product_info_detail[8]}")
                     st.subheader(f"**Lokasi:** {product_info_detail[3]}")
-                    st.subheader(f"**Tanggal Penjualan ke pengepul 1 atau 2:** {product_info_detail[5]}")
-                    st.subheader(f"**Nama Pengepul 1 atau 2:** {product_info_detail[6]}")
+                    st.subheader(f"**Tanggal Penjualan ke pengepul 1 atau 2:** {product_info_detail[4]}")
+                    st.subheader(f"**Nama Pengepul 1 atau 2:** {product_info_detail[5]}")
 
                     # Menampilkan gambar jika ada
-                    if product_info_detail[8]:
-                        image_db = Image.open(io.BytesIO(product_info_detail[9]))
+                    if product_info_detail[7]:
+                        image_db = Image.open(io.BytesIO(product_info_detail[7]))
                         st.image(image_db, caption='Gambar dari Database SQLite', use_container_width=True)
                     else:
                         st.info("Tidak ada gambar untuk produk ini.")
