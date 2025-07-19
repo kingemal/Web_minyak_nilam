@@ -379,6 +379,7 @@ def penelusuran(Id_Penyulingan=None):
             Kadar_PA TEXT,
             Lokasi TEXT,
             Tanggal_Penjualan TEXT,
+            Pengepul TEXT,
             Tanggal_Penyulingan TEXT
                             )
     ''')
@@ -404,7 +405,7 @@ def penelusuran(Id_Penyulingan=None):
         product_info = get_product_info(Id_Penyulingan) 
 
         if product_info:
-            st.subheader(f"**Tanggal Penyulingan:** {product_info[9]}")
+            st.subheader(f"**Tanggal_Penyulingan:** {product_info[9]}")
             
             # Menampilkan detail produk dari Id_Minyak_Nilam
             id_minyak_nilam_to_view = product_info[1]
