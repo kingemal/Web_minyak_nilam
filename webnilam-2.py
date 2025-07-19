@@ -379,7 +379,6 @@ def penelusuran(Id_Penyulingan=None):
             Kadar_PA TEXT,
             Lokasi TEXT,
             Tanggal_Penjualan TEXT,
-            Pengepul TEXT,
             Tanggal_Penyulingan TEXT
                             )
     ''')
@@ -394,8 +393,7 @@ def penelusuran(Id_Penyulingan=None):
             Lokasi TEXT,
             Nama_Pengepul_12 TEXT,
             Tanggal_Penjualan_ke_Pengepul TEXT,
-            Gambar BLOB,
-            Kadar_PA TEXT
+            Gambar BLOB
                              )
     ''')
 
