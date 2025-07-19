@@ -374,13 +374,13 @@ def penelusuran(Id_Penyulingan=None):
         CREATE TABLE IF NOT EXISTS Table_Penyulingan (
             Id_Penyulingan TEXT PRIMARY KEY,
             Id_Minyak_Nilam TEXT PRIMARY KEY,
-            Tanggal_Penyulingan TEXT,
             Jenis_Penyulingan TEXT,
             Jumlah_Minyak TEXT,
             Kadar_PA TEXT,
             Lokasi TEXT,
             Tanggal_Penjualan TEXT
             Pengepul TEXT
+            Tanggal_Penyulingan TEXT
                             )
     ''')
 
