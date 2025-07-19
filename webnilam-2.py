@@ -1,4 +1,4 @@
-import streamlit as st
+3import streamlit as st
 import numpy as np
 import pandas as pd
 from PIL import Image, ImageOps
@@ -405,7 +405,7 @@ def penelusuran(Id_Penyulingan=None):
         product_info = get_product_info(Id_Penyulingan) 
 
         if product_info:
-            st.subheader(f"**Tanggal Penyulingan:** {product_info[9]}")
+            st.subheader(f"**Tanggal Penyulingan:** {product_info[8]}")
             
             # Menampilkan detail produk dari Id_Minyak_Nilam
             id_minyak_nilam_to_view = product_info[1]
