@@ -184,8 +184,6 @@ def pengepul_1():
 
 def pengepul_2():
     st.title("Pengepul Nilam 2")
-    Id_Petani_list = get_ids_from_db("SELECT Id_Petani FROM Table_Petani")
-    Id_Pengepul_1_list = get_ids_from_db("SELECT Id_Pengepul_1 FROM Table_Pengepul_1")
     Kadar_PA_list = get_ids_from_db("SELECT Kadar_PA FROM Table_Penyulingan")
     Id_Petani = st.selectbox("Id_Petani", Id_Petani_list)
     Id_Pengepul_1 = st.selectbox("Id_Pengepul_1", Id_Pengepul_1_list)
