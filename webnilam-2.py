@@ -185,8 +185,8 @@ def pengepul_1():
 def pengepul_2():
     st.title("Pengepul Nilam 2")
     Kadar_PA_list = get_ids_from_db("SELECT Kadar_PA FROM Table_Penyulingan")
-    Id_Petani = st.selectbox("Id_Petani", Id_Petani_list)
-    Id_Pengepul_1 = st.selectbox("Id_Pengepul_1", Id_Pengepul_1_list)
+    Id_Petani = st.text_input("Masukkan Id Petani")
+    Id_Pengepul_1 = st.st.text_input("Masukkan Id Pengepul 1")
     Kadar_PA_Pembelian = st.selectbox("Id_Kadar_PA(%)", Kadar_PA_list)
     Id_Pengepul_2 = st.text_input("Masukkan Id Pengepul 2")
     Id_Penyulingan = st.text_input("Masukkan Id Penyulingan")
