@@ -169,8 +169,6 @@ def get_ids_from_db(query):
 
 def pengepul_1():
     st.title("Pengepul Nilam 1")
-    Id_Petani_list = get_ids_from_db("SELECT Id_Petani FROM Table_Petani")
-    Id_Petani = st.selectbox("Id_Petani", Id_Petani_list)
     Id_Pengepul_1= st.text_input("Id Pengepul 1")
     Id_Penyulingan = st.text_input("Masukkan Id Penyulingan")
     Tanggal_Pembelian = st.date_input("Tanggal Pembelian")
